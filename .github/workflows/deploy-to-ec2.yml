@@ -63,16 +63,6 @@ jobs:
           script: |
             echo "🚀 Starting deployment..."
 
-            # Kill the running application (if exists)
-            if pgrep -f 'java -jar' > /dev/null; then
-              sudo pkill -9 -f 'java -jar'
-              echo "✅ Killed existing Spring Boot process"
-            else
-              echo "⚠️ No existing Spring Boot process found"
-            fi
-
-            sleep 5
-
             # Navigate to the correct directory
             cd /home/ubuntu/app/target
 
