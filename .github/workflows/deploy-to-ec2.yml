@@ -67,7 +67,7 @@ jobs:
             # Navigate to the correct directory
             cd /home/ubuntu/app/target
 
-            # pkill -9 -f 'java -jar'            
+            pkill -9 -f 'java -jar'            
 
             chmod +x *.jar
 
