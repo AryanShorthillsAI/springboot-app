@@ -1,0 +1,35 @@
+name: Install packages to EC2
+
+on:
+  # push:
+  #   branches:
+  #     deploy-to-ec2
+  workflow_dispatch:
+
+jobs:
+  install_packages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Java and Maven on EC2
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            # Update package lists
+            sudo apt update
+            echo "updated packages list"
+            
+            # Install Java 17
+            sudo apt install -y openjdk-17-jdk
+            java -version
+            echo "Java Installed"
+
+            # Install Maven
+            sudo apt install -y maven
+            mvn -version
+            echo "maven Installed"
