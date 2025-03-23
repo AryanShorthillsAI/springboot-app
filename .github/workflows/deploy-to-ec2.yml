@@ -6,9 +6,9 @@ on:
     types:
       - completed
 
-  push:
-    branches:
-      - deploy-to-ec2
+  # push:
+  #   branches:
+  #     - deploy-to-ec2
 
   workflow_dispatch:
 
