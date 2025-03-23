@@ -61,9 +61,12 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+            echo "🚀 Starting deployment..."
+
             # Stop any running Spring Boot application
+            echo "🔴 Stopping any existing Spring Boot application"
             sudo pkill -9 -f 'java -jar' || echo "No existing process found"
-            echo "🔴 Stopped any existing Spring Boot application"
+            sleep 5  # Wait for shutdown
 
             # Ensure deployment directory exists
             cd /home/ubuntu/app/target
@@ -71,7 +74,8 @@ jobs:
             # Set execute permission for JAR
             chmod +x *.jar
 
-            # Run the application in background (change to port 8080 if needed)
+            # Run the application in background
+            echo "🟢 Starting Spring Boot application..."
             nohup sudo java -jar *.jar --server.port=80 > app.log 2>&1 &
 
             echo "✅ Spring Boot application deployed successfully!"
