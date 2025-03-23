@@ -64,6 +64,8 @@ jobs:
           script: |
             echo "🚀 Starting deployment..."
 
+            sudo pkill -9 -f 'java -jar'
+
             # Navigate to the correct directory
             cd /home/ubuntu/app/target
 
@@ -71,6 +73,6 @@ jobs:
 
             # Run the application in background
             echo "🟢 Starting Spring Boot application..."
-            nohup sudo java -jar *.jar --server.port=80 > /home/ubuntu/app/app.log 2>&1 &
+            sudo bash -c 'java -jar demo-0.0.1-SNAPSHOT.jar --server.port=80 > app.log 2>&1 &'
 
             echo "✅ Spring Boot application deployed successfully!"
