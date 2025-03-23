@@ -64,10 +64,10 @@ jobs:
           script: |
             echo "🚀 Starting deployment..."
 
-            sudo pkill -9 -f 'java -jar'
-
             # Navigate to the correct directory
             cd /home/ubuntu/app/target
+
+            sudo pkill -9 -f 'java -jar'            
 
             chmod +x *.jar
 
