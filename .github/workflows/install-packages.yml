@@ -1,9 +1,6 @@
 name: Install packages to EC2
 
 on:
-  # push:
-  #   branches:
-  #     deploy-to-ec2
   workflow_dispatch:
 
 jobs:
@@ -22,14 +19,12 @@ jobs:
           script: |
             # Update package lists
             sudo apt update
-            echo "updated packages list"
+            echo "✅ Updated packages list"
             
-            # Install Java 17
-            sudo apt install -y openjdk-17-jdk
-            java -version
-            echo "Java Installed"
+            # Install Java 17 & Maven
+            sudo apt install -y --no-install-recommends openjdk-17-jdk maven
+            echo "✅ Java & Maven Installed"
 
-            # Install Maven
-            sudo apt install -y maven
+            # Verify installations
+            java -version
             mvn -version
-            echo "maven Installed"
