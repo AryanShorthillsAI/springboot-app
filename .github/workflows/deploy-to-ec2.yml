@@ -64,8 +64,8 @@ jobs:
             echo "🚀 Starting deployment..."
 
             # Stop any running Spring Boot application
-            echo "🔴 Stopping any existing Spring Boot application"
             sudo pkill -9 -f 'java -jar' || echo "No existing process found"
+            echo "🔴 Stopping any existing Spring Boot application"
             sleep 5  # Wait for shutdown
 
             # Navigate to the correct directory
