@@ -63,10 +63,6 @@ jobs:
           script: |
             echo "🚀 Starting deployment..."
 
-            # Check for running Java processes
-            echo "🔍 Checking for running Java processes..."
-            ps aux | grep java
-
             # Kill the running application (if exists)
             if pgrep -f 'java -jar' > /dev/null; then
               sudo pkill -9 -f 'java -jar'
@@ -75,16 +71,12 @@ jobs:
               echo "⚠️ No existing Spring Boot process found"
             fi
 
+            sleep 5
+
             # Navigate to the correct directory
             cd /home/ubuntu/app/target
 
-            # Ensure the JAR file exists
-            if ls *.jar 1> /dev/null 2>&1; then
-              echo "✅ JAR file found!"
-            else
-              echo "❌ ERROR: No JAR file found in /home/ubuntu/app/target"
-              exit 1
-            fi
+            chmod +x *.jar
 
             # Run the application in background
             echo "🟢 Starting Spring Boot application..."
