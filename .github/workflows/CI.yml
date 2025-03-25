@@ -38,7 +38,7 @@ jobs:
       - name: Build JAR with Maven
         run: |
           mvn clean package # Build JAR
-          find target -name "*.jar
+          find target -name "*.jar"
           
       - name: Upload JAR Artifact
         uses: actions/upload-artifact@v4
