@@ -9,7 +9,6 @@ on:
   push:
     branches:
       - deploy-to-ec2
-      - main
 
   workflow_dispatch:
 
@@ -67,7 +66,7 @@ jobs:
             # Navigate to the correct directory
             cd /home/ubuntu/app/target
 
-            sudo pkill -9 -f 'java -jar' || echo "No process found"            
+            sudo fuser -k 80/tcp || echo "No process found"            
 
             chmod +x *.jar
 
