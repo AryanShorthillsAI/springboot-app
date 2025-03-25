@@ -3,11 +3,11 @@ name: Deploy
 on:
   workflow_run:
     workflows: ["Build"]
-    types:
-      - completed
-  push:
     branches:
       - deploy-to-ec2
+    types:
+      - completed
+    
 
 jobs:
   deploy:
