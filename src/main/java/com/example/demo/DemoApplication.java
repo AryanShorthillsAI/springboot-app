@@ -17,6 +17,6 @@ public class DemoApplication {
 	@GetMapping("/")
 	public String getName()
 	{
-		return "Hello, This is a demo spring boot APP, test 1";
+		return "Hello, This is a demo spring boot APP, test 2";
 	}
 }
