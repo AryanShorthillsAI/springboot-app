@@ -1,13 +1,11 @@
 name: Deploy
 
 on:
-  # push:
-  #   branches:
-  #     - deploy-to-ec2
+  push:
+    branches:
+      - deploy-to-ec2
   workflow_run:
     workflows: ["build"]
-    branches:
-    - deploy-to-ec2
     types:
       - completed
 
