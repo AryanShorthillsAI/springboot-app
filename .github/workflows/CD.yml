@@ -1,9 +1,15 @@
 name: Deploy
 
 on:
-  push:
+  # push:
+  #   branches:
+  #     - deploy-to-ec2
+  workflow_run:
+    workflows: ["build"]
     branches:
-      - deploy-to-ec2
+    - deploy-to-ec2
+    types:
+      - completed
 
 jobs:
   deploy:
@@ -32,7 +38,7 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             cd /home/ubuntu/app
-            rm  app.log
+            rm -f app.log
             rm -rf target
         
       - name: Copy JAR to EC2
@@ -42,7 +48,7 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           source: "target/*.jar"
-          target: "/home/ubuntu/app/"
+          target: "/home/ubuntu/app/target"
 
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v0.1.10
@@ -58,7 +64,9 @@ jobs:
 
             chmod +x *.jar
 
-            # Run the application in background
+            # Stop existing process
+            sudo fuser -k 80/tcp
+
             echo "🟢 Starting Spring Boot application..."
             nohup sudo java -jar /home/ubuntu/app/target/demo-0.0.1-SNAPSHOT.jar --server.port=80 > /home/ubuntu/app/app.log 2>&1 &
 
