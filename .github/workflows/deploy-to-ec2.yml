@@ -67,7 +67,7 @@ jobs:
             # Navigate to the correct directory
             cd /home/ubuntu/app/target
 
-            pkill -9 -f 'java -jar'            
+            sudo pkill -9 -f 'java -jar' || echo "No process found"            
 
             chmod +x *.jar
 
