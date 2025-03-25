@@ -1,9 +1,9 @@
-name: Deploy Spring Boot to EC2
+name: Build and Deploy to EC2
 
 on:
   push:
     branches:
-      - main
+      - deploy-to-ec2
 
 jobs:
   build:
