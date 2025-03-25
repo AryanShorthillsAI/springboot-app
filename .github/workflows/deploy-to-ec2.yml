@@ -74,4 +74,6 @@ jobs:
             echo "🟢 Starting Spring Boot application..."
             nohup sudo java -jar /home/ubuntu/app/target/demo-0.0.1-SNAPSHOT.jar --server.port=80 > /home/ubuntu/app/app.log 2>&1 &
 
+            sleep 20
+
             echo "✅ Spring Boot application deployed successfully!"
